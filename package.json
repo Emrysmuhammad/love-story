@@ -1,0 +1,11 @@
+{
+  "name": "love-story",
+  "version": "1.0.0",
+  "description": "A romantic, interactive love webpage built with vanilla HTML, CSS and JavaScript.",
+  "main": "index.html",
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": ["romantic", "love", "interactive", "javascript", "html5", "css3"],
+  "license": "MIT"
+}
