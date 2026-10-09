@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2b0a1c">
+  <title>For You - A Little Love Story</title>
+  <meta name="description" content="A small, interactive love story made just for you.">
+
+  <!-- Romantic fonts (the page still works with fallback fonts if offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/effects.css">
+  <link rel="stylesheet" href="css/screens.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <link rel="stylesheet" href="css/final.css">
+</head>
+<body>
+  <!-- Layer for the floating hearts, pearls and sparkles -->
+  <div id="particles" class="particles" aria-hidden="true"></div>
+
+  <!-- Background music controls -->
+  <div class="music" role="group" aria-label="Background music">
+    <button id="music-btn" class="music__btn" type="button" aria-label="Play music" aria-pressed="false">&#9834;</button>
+    <input id="music-volume" class="music__volume" type="range" min="0" max="1" step="0.05" value="0.35" aria-label="Music volume">
+  </div>
+
+  <main class="stage">
+
+    <!-- SCREEN 1: the poem -->
+    <section id="screen-poem" class="screen is-active" aria-labelledby="poem-title">
+      <div class="moon" aria-hidden="true"></div>
+      <article id="poem" class="poem">
+        <div id="poem-photo" class="poem__photo"></div>
+        <p id="poem-for" class="eyebrow"></p>
+        <h1 id="poem-title" class="script-title" tabindex="-1"></h1>
+        <div id="poem-body" class="poem__body"></div>
+        <button id="continue-btn" class="btn btn--glow" type="button">Continue &#10084;</button>
+      </article>
+    </section>
+
+    <!-- SCREEN 2: the questions, one at a time -->
+    <section id="screen-quiz" class="screen" aria-labelledby="quiz-question" hidden>
+      <div id="quiz-card" class="quiz-card">
+        <div id="quiz-progress" class="progress" role="progressbar" aria-label="Question progress"
+             aria-valuemin="0" aria-valuemax="12" aria-valuenow="1">
+          <span id="progress-fill" class="progress__fill"></span>
+        </div>
+        <p id="quiz-count" class="quiz-count"></p>
+        <div id="quiz-photo" class="quiz-photo"></div>
+        <h2 id="quiz-question" class="quiz-question" tabindex="-1" data-focus></h2>
+        <p id="quiz-note" class="quiz-note"></p>
+        <div id="quiz-options" class="options"></div>
+        <p id="dodge-msg" class="dodge-msg" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: the personalized ending -->
+    <section id="screen-final" class="screen" aria-labelledby="final-title" hidden>
+      <article class="final">
+        <p class="eyebrow">Our story begins</p>
+        <h2 id="final-title" class="script-title" tabindex="-1" data-focus>It's a date! &#128149;</h2>
+        <p id="final-summary" class="final__summary"></p>
+
+        <section class="plan" aria-labelledby="plan-title">
+          <h3 id="plan-title" class="plan__title">Our date plan</h3>
+          <dl id="plan-list" class="plan__list"></dl>
+        </section>
+
+        <div id="final-gallery" class="gallery"></div>
+        <div id="final-closing" class="closing"></div>
+        <p id="final-sign" class="signature"></p>
+        <button id="replay-btn" class="btn btn--ghost" type="button">Start over &#8634;</button>
+      </article>
+    </section>
+
+  </main>
+
+  <noscript>
+    <p style="position:relative;z-index:2;text-align:center;color:#fff;padding:2rem">
+      This little love story needs JavaScript to unfold. &#128140;
+    </p>
+  </noscript>
+
+  <script src="js/config.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/confetti.js"></script>
+  <script src="js/images.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/escape.js"></script>
+  <script src="js/summary.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
