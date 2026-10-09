@@ -1,0 +1,92 @@
+/* ==========================================================
+   BASE: palette, typography, page background
+   Red leads, supported by pink, white, gold and purple.
+   ========================================================== */
+:root {
+  --red: #e11d48;
+  --red-deep: #9f1239;
+  --rose: #fb7185;
+  --pink: #f9a8d4;
+  --ivory: #fff5f7;
+  --gold: #fbbf24;
+  --gold-soft: #f6dc8c;
+  --purple: #7e22ce;
+  --plum: #2a0a1f;
+
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(251, 191, 36, 0.28);
+
+  --font-script: 'Great Vibes', 'Brush Script MT', cursive;
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Quicksand', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+/* The hidden attribute must always win over display rules */
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--ivory);
+  font-family: var(--font-sans);
+  background: linear-gradient(135deg, #2b0a1c 0%, #5c0f33 35%, #3a0d4d 70%, #1c0a2e 100%);
+  background-size: 300% 300%;
+  animation: bg-shift 28s ease-in-out infinite;
+  overflow-x: hidden;
+}
+
+/* Soft rose and purple glows behind everything */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(251, 113, 133, 0.22), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(126, 34, 206, 0.28), transparent 50%);
+}
+
+@keyframes bg-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* ---------- Typography helpers ---------- */
+.script-title {
+  margin: 0;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 10vw, 4.3rem);
+  line-height: 1.1;
+  color: var(--gold-soft);
+  background: linear-gradient(90deg, var(--gold-soft), #ffffff 50%, var(--rose));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 14px rgba(251, 113, 133, 0.45));
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.75rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+
+/* ---------- Focus styles ---------- */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Headings are focused by script for screen readers: no ring needed */
+[tabindex="-1"]:focus { outline: none; }
