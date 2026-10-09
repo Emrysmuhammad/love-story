@@ -1,0 +1,97 @@
+/* ==========================================================
+   EFFECTS: floating hearts, pearls, sparkles and confetti
+   ========================================================== */
+
+/* ---------- Ambient particle layer ---------- */
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/*
+  Each particle travels from (--x0, --y0) to (--x1, --y1).
+  The inner element adds a gentle side-to-side sway on top.
+*/
+.particle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: drift var(--dur, 14s) linear var(--delay, 0s) forwards;
+}
+
+.particle__inner {
+  display: block;
+  font-size: var(--size, 20px);
+  line-height: 1;
+  animation: sway var(--sway-dur, 3.5s) ease-in-out infinite alternate;
+}
+
+.particle--heart .particle__inner {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.particle--sparkle .particle__inner {
+  color: var(--gold);
+  text-shadow: 0 0 8px #fff7cc;
+  animation: sway var(--sway-dur, 3.5s) ease-in-out infinite alternate,
+             twinkle 1.6s ease-in-out infinite;
+}
+
+.particle--pearl .particle__inner {
+  width: var(--size, 12px);
+  height: var(--size, 12px);
+  font-size: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #ffe4ec 45%, #f3c6d6 75%, #d9a5b9);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+@keyframes drift {
+  0%   { transform: translate(var(--x0), var(--y0)) rotate(0deg) scale(0.6); opacity: 0; }
+  12%  { opacity: var(--o, 0.8); }
+  88%  { opacity: var(--o, 0.8); }
+  100% { transform: translate(var(--x1), var(--y1)) rotate(var(--rot, 20deg)) scale(1); opacity: 0; }
+}
+
+@keyframes sway {
+  from { transform: translateX(calc(var(--sway, 16px) * -1)); }
+  to   { transform: translateX(var(--sway, 16px)); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; filter: brightness(1); }
+  50%      { opacity: 1;    filter: brightness(1.6); }
+}
+
+/* ---------- Confetti hearts (celebrations and click bursts) ---------- */
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti {
+  position: absolute;
+  left: var(--ox, 50%);
+  top: var(--oy, 40%);
+  font-size: var(--size, 20px);
+  line-height: 1;
+  text-shadow: 0 0 8px currentColor;
+  will-change: transform, opacity;
+  animation: confetti var(--dur, 3s) cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+/* Burst outwards and upwards first, then tumble down */
+@keyframes confetti {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(0.3); opacity: 0; }
+  10%  { opacity: 1; }
+  35%  { transform: translate(calc(var(--dx) * 0.6), var(--peak)) rotate(calc(var(--rot) * 0.4)) scale(1); }
+  100% { transform: translate(var(--dx), var(--fall)) rotate(var(--rot)) scale(0.9); opacity: 0; }
+}
