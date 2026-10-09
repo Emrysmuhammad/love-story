@@ -1,0 +1,125 @@
+/* ==========================================================
+   FINAL SCREEN, responsive tweaks and reduced motion
+   ========================================================== */
+
+.final {
+  padding: 28px 20px 36px;
+  text-align: center;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), inset 0 0 40px rgba(251, 113, 133, 0.06);
+}
+
+.final__summary {
+  max-width: 34em;
+  margin: 18px auto 26px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.02rem, 3.9vw, 1.25rem);
+  line-height: 1.85;
+}
+
+/* Each sentence fades in one by one (--i is set by script) */
+.sentence {
+  opacity: 0;
+  animation: fade-in 0.9s ease forwards;
+  animation-delay: calc(var(--i, 0) * 0.7s + 0.6s);
+}
+
+@keyframes fade-in {
+  to { opacity: 1; }
+}
+
+/* ---------- Date plan card ---------- */
+.plan {
+  max-width: 460px;
+  margin: 0 auto 24px;
+  padding: 16px 18px 18px;
+  text-align: left;
+  border: 1px dashed rgba(251, 191, 36, 0.5);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.plan__title {
+  margin: 0 0 8px;
+  font-family: var(--font-script);
+  font-size: 2.1rem;
+  font-weight: 400;
+  text-align: center;
+  color: var(--gold-soft);
+}
+
+.plan__list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  margin: 0;
+}
+
+.plan__list dt {
+  align-self: center;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+
+.plan__list dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ---------- Photo gallery ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0 0 24px;
+}
+
+/* ---------- Closing words ---------- */
+.closing {
+  max-width: 34em;
+  margin: 0 auto 10px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--pink);
+}
+
+.closing p { margin: 0 0 10px; }
+
+.signature {
+  margin: 6px 0 24px;
+  font-family: var(--font-script);
+  font-size: 2.5rem;
+  color: var(--gold-soft);
+  text-shadow: 0 0 18px rgba(251, 191, 36, 0.35);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 520px) {
+  .gallery { grid-template-columns: 1fr 1fr; }
+  .gallery .photo:nth-child(3) { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+}
+
+@media (max-width: 420px) {
+  .stage { padding: 70px 12px 32px; }
+  .moon { width: 72px; height: 72px; top: -30px; right: -2px; }
+  .music__volume { width: 60px; }
+  .plan__list { grid-template-columns: 1fr; gap: 2px 0; }
+  .plan__list dd { margin-bottom: 8px; }
+}
+
+/* ---------- Reduced motion: keep everything visible, drop the movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  .moon, .btn--glow::after, .music__btn { animation: none; }
+  .screen { transition: opacity 0.2s ease; transform: none; }
+  .line, .sentence, .option { animation: none; opacity: 1; transform: none; }
+  #continue-btn { animation: none; opacity: 1; }
+  .quiz-card { transition: opacity 0.2s ease; }
+}
